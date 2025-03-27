@@ -1,0 +1,36 @@
+---
+description: TypeScript and general code style rules
+globs: ["src/**/*.ts", "src/**/*.tsx"]
+---
+
+# TypeScript and Code Style Rules
+
+You are an expert in TypeScript, React, Node.js, and Cloudflare Workers, specializing in building stateless web applications with browser-based state management.
+
+## Code Style and Structure
+- Write concise, technical TypeScript code with proper type definitions
+- Use functional programming patterns; avoid classes
+- Keep components small and focused (max 150 lines)
+- Use feature-based folder structure
+- Separate business logic from UI components
+- Follow clean architecture principles
+
+## TypeScript Usage
+- Use TypeScript for all code; prefer interfaces over types
+- Define proper types for all API responses and requests
+- Use strict TypeScript configuration
+- Implement proper error handling with typed errors
+
+## Error Handling
+- Use typed error handling
+- Provide user-friendly error messages
+- Log errors appropriately
+- Handle edge cases gracefully
+- Implement proper error boundaries
+
+## Performance and Security
+- Always consider security implications
+- Optimize for performance
+- Write clean, maintainable code
+- Follow TypeScript best practices
+- Keep the application completely stateless 

@@ -1,0 +1,116 @@
+---
+description: Backend development rules for Cloudflare Workers
+globs: ["src/workers/**/*", "src/api/**/*", "src/backend/**/*"]
+---
+
+# Backend Development Rules
+
+## Edge Runtime Architecture
+- Use Next.js Edge Runtime on Cloudflare Pages
+- Implement API routes in app/api directory
+- Optimize for edge execution
+- Keep functions stateless
+
+## API Route Structure
+```typescript
+// Example API route structure
+export const runtime = 'edge'
+
+export async function POST(request: Request) {
+  try {
+    const data = await request.json()
+    // Implementation
+    return Response.json({ success: true, data })
+  } catch (error) {
+    return Response.json(
+      { success: false, error: error.message },
+      { status: 400 }
+    )
+  }
+}
+```
+
+## API Features
+- OpenAPI specification validation
+- Gherkin feature generation
+- Cucumber.js test execution
+- Real-time test result streaming
+
+## Performance Guidelines
+- Optimize for edge execution
+- Implement proper caching strategies
+- Use streaming responses where appropriate
+- Keep payload sizes minimal
+
+## Security Guidelines
+- Implement rate limiting
+- Validate all inputs using Zod
+- Set appropriate CORS policies
+- Follow security best practices
+- Monitor for vulnerabilities
+
+## Error Handling
+- Use consistent error response format
+- Implement proper logging
+- Handle edge runtime limitations
+- Provide detailed error messages in development
+
+## Testing
+- Write unit tests for API routes
+- Test edge runtime compatibility
+- Implement API integration tests
+- Monitor performance metrics
+
+## Architecture Principles
+- Maintain complete statelessness in workers
+- Follow Edge Computing best practices
+- Implement proper request/response handling
+- Use TypeScript for all worker code
+- Follow RESTful API design principles
+
+## Worker Development
+- Keep workers focused and single-purpose
+- Implement proper CORS handling
+- Use proper HTTP status codes
+- Handle all edge cases gracefully
+- Implement proper error handling with typed errors
+- Use proper TypeScript types for requests/responses
+
+## Security Implementation
+- Implement proper CORS and security headers
+  - Access-Control-Allow-Origin
+  - Content-Security-Policy
+  - X-Content-Type-Options
+  - X-Frame-Options
+  - X-XSS-Protection
+- Use proper rate limiting
+- Validate and sanitize all inputs
+- Implement proper authentication/authorization
+- Follow OWASP security guidelines
+- Use environment variables for sensitive data
+
+## Performance Optimization
+- Minimize worker execution time
+- Implement proper caching strategies
+  - Use Cache API effectively
+  - Set appropriate cache headers
+  - Implement stale-while-revalidate when appropriate
+- Optimize API response times
+- Use proper error handling
+- Monitor worker performance metrics
+
+## API Design
+- Follow REST API best practices
+- Use proper HTTP methods
+- Implement proper status codes
+- Use consistent response formats
+- Provide detailed error messages
+- Document all endpoints using OpenAPI/Swagger
+
+## Development Practices
+- Write clean, maintainable code
+- Follow TypeScript best practices
+- Implement proper logging
+- Use proper versioning
+- Document all endpoints and functions
+- Follow TDD practices where applicable 

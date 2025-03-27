@@ -1,0 +1,72 @@
+---
+description: Frontend development rules for React and UI components
+globs: ["src/**/*.tsx", "src/components/**/*", "src/pages/**/*"]
+---
+
+# Frontend Development Rules
+
+## Project Context
+This is an API Testing Platform that allows users to generate and manage API tests through a web interface. The application is completely stateless, with all state managed in the browser's IndexedDB.
+
+## Technical Stack
+- Frontend: React + Vite (deployed on Cloudflare Pages)
+- State Management: Browser's IndexedDB
+- UI: Shadcn/ui + Tailwind CSS
+- Editor: Monaco Editor for feature files
+
+## Frontend Development
+- All state must be managed in the browser using IndexedDB
+- Use React hooks for component logic
+- Implement proper error boundaries
+- Use code splitting and lazy loading for large components
+- Follow accessibility best practices
+
+## Performance Optimization
+- Optimize bundle sizes
+- Implement proper caching strategies
+- Use code splitting and lazy loading
+- Optimize API response times
+- Monitor and log performance metrics
+
+## Documentation
+- Write clear component documentation
+- Include setup instructions in README
+- Document environment configurations
+- Maintain changelog
+
+## Component Architecture
+- Use Next.js Client/Server Component patterns
+- Implement atomic design principles
+- Keep components focused and single-responsibility
+
+## State Management
+- Use Zustand for global state
+- Implement React Query for API state
+- Use IndexedDB for persistent storage
+- Keep component state local when possible
+
+## UI Guidelines
+- Follow Shadcn/ui component patterns
+- Use Tailwind CSS for styling
+- Maintain dark/light theme support
+- Ensure responsive design
+- Follow WCAG accessibility guidelines
+
+## Client-side Features
+- Monaco Editor integration for feature files
+- Real-time validation and feedback
+- Offline-first capabilities using IndexedDB
+- Progressive enhancement
+
+## Performance Guidelines
+- Implement code splitting
+- Optimize images and assets
+- Use Next.js optimizations
+- Monitor and optimize Core Web Vitals
+- Implement proper loading states
+
+## Error Handling
+- Graceful degradation
+- Clear error messages
+- Retry mechanisms for API calls
+- Offline support fallbacks 

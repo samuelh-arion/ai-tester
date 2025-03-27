@@ -1,0 +1,72 @@
+---
+description: Core project rules and context (Always attached)
+globs: ["**/*"]
+---
+
+# Base Project Rules
+
+## Project Structure
+- Next.js application with Edge Runtime on Cloudflare Pages
+- Monolithic architecture combining frontend and backend
+- Feature-first organization
+
+## Directory Structure
+```
+/
+├── app/              # Next.js app directory
+│   ├── api/         # Edge API routes
+│   ├── (routes)/    # Page routes
+│   └── layout.tsx   # Root layout
+├── components/       # React components
+├── lib/             # Shared utilities
+├── features/        # Feature files and specs
+├── styles/          # Global styles
+└── public/          # Static assets
+```
+
+## Core Technologies
+- Next.js with Edge Runtime
+- React 18+
+- TypeScript
+- Tailwind CSS
+- Shadcn/ui
+- Zustand
+- IndexedDB for client storage
+
+## Development Guidelines
+- Use TypeScript strict mode
+- Follow feature-first architecture
+- Implement edge functions for all API routes
+- Keep components atomic and reusable
+- Use client-side storage for test data
+
+# API Testing Platform - Core Rules
+
+## Project Context
+This is a stateless API Testing Platform built with:
+- Frontend: React + Vite on Cloudflare Pages
+- Backend: Cloudflare Workers (Edge Computing)
+- State: Browser's IndexedDB
+- UI: Shadcn/ui + Tailwind CSS
+- Testing: Vitest, Playwright
+
+## Essential Guidelines
+- All code must be in TypeScript
+- Keep everything stateless
+- Store state in browser's IndexedDB
+- Follow functional programming patterns
+- Write clean, maintainable code
+- Document all public interfaces
+
+## Critical Practices
+- Security first: validate inputs, sanitize data
+- Performance: optimize bundles and API responses
+- Testing: write tests for all new code
+- Error handling: use typed errors, proper status codes
+- Documentation: maintain OpenAPI specs
+
+## References
+- Use @typescript for detailed TypeScript rules
+- Use @frontend for React/UI guidelines
+- Use @backend for Worker implementation
+- Use @testing for test requirements 

@@ -1,0 +1,81 @@
+---
+description: Testing requirements and practices
+globs: ["src/**/*.test.ts", "src/**/*.test.tsx", "src/**/*.spec.ts", "src/**/*.spec.tsx", "tests/**/*"]
+alwaysApply: false
+---
+
+# Testing Rules
+
+## Testing Stack
+- Vitest for unit and integration tests
+- React Testing Library for component tests
+- Cucumber.js for API testing
+- Playwright for E2E testing
+
+## Test Organization
+```
+/
+├── __tests__/           # Test files
+│   ├── unit/          # Unit tests
+│   ├── integration/   # Integration tests
+│   └── e2e/          # End-to-end tests
+├── features/           # Cucumber feature files
+└── test-utils/        # Test utilities
+```
+
+## Testing Guidelines
+- Write tests before implementation (TDD)
+- Maintain high test coverage
+- Test edge cases thoroughly
+- Mock external dependencies
+- Use meaningful test descriptions
+
+## Component Testing
+- Test component rendering
+- Test user interactions
+- Test state changes
+- Test error states
+- Test loading states
+
+## API Testing
+- Test all API routes
+- Validate request/response schemas
+- Test error handling
+- Test edge runtime compatibility
+- Test rate limiting
+- Test streaming responses
+
+## E2E Testing
+- Test critical user flows
+- Test offline functionality
+- Test data persistence
+- Test cross-browser compatibility
+- Test responsive design
+
+## Performance Testing
+- Test load times
+- Test API response times
+- Test edge function performance
+- Monitor memory usage
+- Test IndexedDB operations
+
+## Testing Requirements
+- Write unit tests for all components using Vitest
+- Implement E2E tests using Playwright
+- Test all API endpoints thoroughly
+- Include performance testing
+- Follow TDD practices where applicable
+
+## Backend Testing (Cloudflare Workers)
+- Keep workers completely stateless
+- Test CORS and security headers
+- Verify rate limiting functionality
+- Follow REST API best practices
+- Test error handling with proper status codes
+
+## Security Testing
+- Validate all inputs
+- Test data sanitization
+- Follow OWASP security guidelines
+- Test rate limiting functionality
+- Verify secure headers 
