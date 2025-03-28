@@ -6,7 +6,7 @@ import { PasswordAuth } from "@/components/password-auth"
 import { useStore, useAuthStore } from "@/lib/store"
 
 export default function Home() {
-  const { openApiSpec } = useStore()
+  const { readyToEdit } = useStore()
   const { isAuthenticated } = useAuthStore()
 
   if (!isAuthenticated) {
@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <div className="h-screen w-full overflow-hidden">
-      {!openApiSpec ? (
+      {!readyToEdit ? (
         <div className="h-full">
           <OpenAPIUploader />
         </div>

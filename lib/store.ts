@@ -53,6 +53,8 @@ interface AppState {
   currentTab: string
   testData: Record<string, any>
   testResults: TestResult[]
+  readyToEdit: boolean
+  setReadyToEdit: (ready: boolean) => void
   addEnvironment: (env: Environment) => void
   updateEnvironment: (name: string, env: Environment) => void
   removeEnvironment: (name: string) => void
@@ -111,6 +113,8 @@ export const useStore = create<AppState>()(
       currentTab: 'features',
       testData: {},
       testResults: [],
+      readyToEdit: false,
+      setReadyToEdit: (ready: boolean) => set({ readyToEdit: ready }),
 
       // Environment management functions
       addEnvironment: (env: Environment) =>
@@ -185,7 +189,8 @@ export const useStore = create<AppState>()(
           scenarioCode: null,
           currentTab: 'features',
           testData: {},
-          testResults: []
+          testResults: [],
+          readyToEdit: false
         })
       }
     }),
