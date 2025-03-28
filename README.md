@@ -1,36 +1,192 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI API Tester
 
-## Getting Started
+A modern web application for testing and validating APIs using AI-powered tools. Built with Next.js and deployed on Cloudflare Pages.
 
-First, run the development server:
+## 🚀 Tech Stack
+
+### Frontend
+
+- **Next.js 14** - React framework with App Router
+- **React 18** - UI library
+- **TailwindCSS** - Utility-first CSS framework
+- **Radix UI** - Headless UI components library
+- **Monaco Editor** - Code editor component
+- **Zustand** - State management
+- **Axios** - HTTP client
+
+### Backend & Infrastructure
+
+- **Cloudflare Pages** - Hosting and deployment platform
+- **Cloudflare Workers** - Serverless functions
+- **OpenAI SDK** - AI integration for test generation
+- **Zod** - Structured Outputs
+
+### Testing & Development
+
+- **Cucumber.js** - Behavior Driven Development (BDD) testing
+- **TypeScript** - Type safety and developer experience
+- **ESLint** - Code linting
+
+## 🔄 Application Flow & Features
+
+### OpenAPI Processing
+
+1. Upload OpenAPI specification files
+2. Automatic validation and analysis
+3. Storage in browser's IndexedDB for persistence
+
+### AI-Powered Test Generation
+
+1. Intelligent analysis of OpenAPI endpoints and schemas
+2. Automatic generation of comprehensive test scenarios using OpenAI
+3. Coverage-focused test case creation:
+   - Happy path scenarios
+   - Edge cases and error conditions
+   - Data validation tests
+   - Authentication and authorization tests
+4. Natural language test descriptions in Gherkin syntax
+5. Smart test data generation based on schema types
+
+### Test Generation & Management
+
+1. Automatic Gherkin feature generation from OpenAPI specs
+2. Real-time feature file editing with Monaco Editor
+3. Custom scenario and step addition
+4. Test suite management (download/upload)
+
+### Environment Configuration
+
+- Multiple environment support (Development, Staging, Production)
+- Per-environment configuration:
+  - Base URLs
+  - Authentication settings
+  - Custom headers
+  - Request timeouts
+
+### Authentication Support
+
+- Multiple auth methods:
+  - API Keys
+  - OAuth 2.0
+  - Bearer Tokens
+  - Basic Auth
+- Secure credential storage
+- Environment-specific authentication
+
+### Test Data Management
+
+- Create and import test data sets (CSV/JSON)
+- Link data sets to test cases
+- Variable support in test scenarios
+- Data persistence in IndexedDB
+
+### Test Execution & Reporting
+
+- Run tests against configured environments
+- Real-time test execution results
+- Comprehensive reporting:
+  - Test execution history
+  - Success/failure rates
+  - Response time statistics
+  - API endpoint coverage
+- Export reports in multiple formats
+
+## 🏗️ Architecture
+
+### Frontend
+
+- React Components with Shadcn/ui + Tailwind CSS
+- State Management: Zustand for local state
+- Storage: Browser's IndexedDB for:
+  - OpenAPI specs
+  - Generated features
+  - Test results
+  - Environment configs
+- Monaco Editor for feature editing
+
+### Backend (Edge Runtime)
+
+- Next.js API Routes on Cloudflare Pages
+- Key Endpoints:
+  - `POST /api/validate-password`: Password validation and security checks
+  - `POST /api/generate-features`: AI-powered feature file generation from OpenAPI specs
+  - `POST /api/generate-tests`: AI-powered test case generation
+- Stateless architecture
+
+### Security
+
+- Built-in Next.js security features
+- Cloudflare rate limiting
+- Request size limits
+- Input validation with Zod
+
+## 🛠️ Setup & Development
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+
+```bash
+git clone [repository-url]
+cd ai-tester
+```
+
+2. Install dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Set up environment variables
+
+The following environment variables are required:
+
+- `OPENAI_API_KEY` - Your OpenAI API key
+
+4. Start the development server
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The project is configured for deployment on Cloudflare Pages.
 
-## Learn More
+### Deploy to Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run deploy
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This command will:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Build the Next.js application
+2. Prepare for Cloudflare Pages
+3. Deploy to your Cloudflare Pages site
 
-## Deploy on Vercel
+The following environment variables are required:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `OPENAI_API_KEY` - Your OpenAI API key
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📚 Project Structure
+
+```
+ai-tester/
+├── app/           # Next.js app router pages and layouts
+├── components/    # Reusable React components
+├── lib/          # Utility functions and shared logic
+├── public/       # Static assets
+└── middleware.ts # Next.js middleware configuration
+```

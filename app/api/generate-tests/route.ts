@@ -1,59 +1,40 @@
+import { createStructuredCompletion } from '@/lib/ai'
+import { STEP_DEFINITION_PROMPT } from '@/lib/constants'
 import { NextResponse } from 'next/server'
+import { z } from 'zod'
 
 export const runtime = 'edge'
 
-function generateStepDefinitions() {
-  return `const { When, Then } = require('@cucumber/cucumber');
-const axios = require('axios');
-const { expect } = require('chai');
-const env = process.env;
+// spec is the API specification
+// feature is the feature file
 
-let response;
+const Features = z.object({
+  content: z.string()
+})
 
-// Configure axios defaults
-const api = axios.create({
-  baseURL: env.API_URL,
-  headers: {
-    'Authorization': \`Bearer \${env.API_TOKEN}\`
-  }
-});
-
-When('I make a GET request to {string}', async function(url) {
-  response = await api.get(url);
-});
-
-When('I make a POST request to {string} with:', async function(url, body) {
-  const data = JSON.parse(body);
-  response = await api.post(url, data);
-});
-
-Then('the response status code should be {int}', function(statusCode) {
-  expect(response.status).to.equal(statusCode);
-});
-
-Then('the response should have the following data:', function(dataTable) {
-  const expectedData = dataTable.rowsHash();
-  
-  Object.keys(expectedData).forEach(key => {
-    expect(response.data[key]).to.equal(expectedData[key]);
-  });
-});
-
-Then('the response should contain {string} with value {string}', function(field, value) {
-  expect(response.data[field]).to.equal(value);
-});`;
+async function generateStepDefinitions(feature: string, specString: string) {
+  const result = await createStructuredCompletion(
+    Features,
+    `Generate step definitions for the following specification:${specString} And the following feature:${feature}`,
+    STEP_DEFINITION_PROMPT,
+    {
+      temperature: 0,
+      propertyName: 'stepDefinition'
+    }
+  )
+  return result.content
 }
 
 export async function POST(request: Request) {
   try {
-    const { feature } = await request.json()
-    
+    const { feature, spec } = await request.json()
+    const specString = JSON.stringify(spec)
     if (!feature) {
       throw new Error('No feature content provided')
     }
 
     // Return the static step definitions
-    const stepDefinitions = generateStepDefinitions()
+    const stepDefinitions = await generateStepDefinitions(feature, specString)
 
     return NextResponse.json({ 
       success: true,

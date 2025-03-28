@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createStructuredCompletion } from '@/lib/ai'
-import { FEATURE_GENERATION } from '@/lib/constants'
+import { FEATURE_PROMPT } from '@/lib/constants'
 
 export const runtime = 'edge'
 
@@ -16,9 +16,9 @@ export async function POST(request: Request) {
     const result = await createStructuredCompletion(
       Features,
       `Generate feature files for testing the following API specification:\n\n${spec}`,
-      FEATURE_GENERATION.SYSTEM_PROMPT,
+      FEATURE_PROMPT, 
       {
-        temperature: FEATURE_GENERATION.TEMPERATURE,
+        temperature: 0,
         propertyName: 'feature'
       }
     )

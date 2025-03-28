@@ -5,14 +5,13 @@ import { useDropzone } from "react-dropzone"
 import { Button } from "@/components/ui/button"
 import { useStore } from "@/lib/store"
 import { Loader2, Upload } from "lucide-react"
-import { importTestSuite } from "@/lib/export-import"
 import JSZip from 'jszip'
 import { makeAuthenticatedRequest } from '@/lib/api'
 import { useRouter } from "next/navigation"
 
 export default function OpenAPIUploader() {
   const router = useRouter()
-  const { setFeatures, setTests, setEnvFiles, setCurrentEnv, resetStore, setOpenApiSpec, setParsedOpenApiSpec } = useStore()
+  const { setFeatures, setTests, setEnvFiles, setCurrentEnv, resetStore, setOpenApiSpec, setParsedOpenApiSpec, setReadyToEdit } = useStore()
   const [isLoading, setIsLoading] = useState(false)
   const [loadingMessage, setLoadingMessage] = useState("")
   const [error, setError] = useState<string | null>(null)
@@ -34,14 +33,13 @@ export default function OpenAPIUploader() {
     const file = acceptedFiles[0]
     if (!file) return
 
+    resetStore()
     setIsLoading(true)
     setError(null)
 
     try {
       if (file.name.endsWith('.zip')) {
         setLoadingMessage("Importing test suite...")
-        // Handle test suite import
-        resetStore() // Reset store before importing
         
         const zip = await JSZip.loadAsync(file)
         const features: Record<string, string> = {}
@@ -75,6 +73,8 @@ export default function OpenAPIUploader() {
         // Set the OpenAPI spec first
         setOpenApiSpec(openApiSpec || 'placeholder')
 
+        setReadyToEdit(true)
+
         // Then set other state
         await setFeatures(features)
         await setTests(tests)
@@ -87,7 +87,6 @@ export default function OpenAPIUploader() {
       } else {
         // Handle OpenAPI spec
         setLoadingMessage("Processing OpenAPI specification...")
-        await resetStore()
         await initializeDefaultEnvironments()
         
         const fileContent = await file.text()
@@ -117,8 +116,8 @@ export default function OpenAPIUploader() {
         await setFeatures(features)
         setLoadingMessage("Feature generation complete!")
         
-        // Only navigate after everything is complete
-        router.push('/')
+        // Set ready to edit after everything is complete
+        setReadyToEdit(true)
       }
     } catch (error) {
       console.error('Error processing file:', error)
